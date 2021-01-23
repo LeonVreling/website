@@ -1,23 +1,41 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <Sidebar/>
+    <div id="main">
+      <router-view/>
+      <Footer/>
+    </div>
   </div>
 </template>
 
 <script>
+import Sidebar from './components/Sidebar.vue'
+import Footer from './components/Footer.vue'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Sidebar,
+    Footer
+  }
 }
 </script>
 
 <style>
+body {
+  margin: 0;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background-color: #C8EFF9;
+  color: #022449;
+}
+
+#main {
+  margin-left: 10vw;
 }
 </style>
