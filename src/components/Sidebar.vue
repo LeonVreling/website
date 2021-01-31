@@ -15,7 +15,8 @@
         </div>
         <b-menu class="is-custom-mobile">
           <b-menu-list label="Menu">
-            <b-menu-item label="Home"/>
+            <router-link to="/">Home</router-link>
+            <!-- <b-menu-item label="Home"/> -->
           </b-menu-list>
           <b-menu-list label="contact">
             <div id="contact">
@@ -51,6 +52,9 @@ export default {
     this.getRandomJoke()
   },
   methods: {
+    router (path) {
+      this.$router.push(path)
+    },
     getRandomJoke () {
       fetch('https://icanhazdadjoke.com/', {
         'method': 'GET',
@@ -94,5 +98,9 @@ export default {
   #contact > a {
     display: inline-block;
     padding: 0.1em;
+  }
+
+  router-link:hover {
+    background-color: #EF9F77;
   }
 </style>
