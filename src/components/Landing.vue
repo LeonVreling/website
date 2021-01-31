@@ -9,39 +9,36 @@
 </template>
 
 <script>
+const querystring = require('querystring')
+
 export default {
   name: 'Landing',
   data () {
     return {
-      token: null
+
     }
   },
   methods: {
     authorizeSpotify () {
-      var CLIENT_ID = '2a4516102ac543b78be97d3449a3b352'
-      var REDIRECT = 'https%3A%2F%2Fwww.vreling.nl%2F%23%2Fspotify%2F'
-      var SCOPE = 'user-read-private%20user-read-email%20user-read-currently-playing'
+      const CLIENT_ID = '2a4516102ac543b78be97d3449a3b352'
+      const REDIRECT = 'https://www.vreling.nl/spotify/'
 
-      console.log('The Spotify button was pressed!')
-      window.open('https://accounts.spotify.com/authorize?client_id=' + CLIENT_ID + '&response_type=token&redirect_uri=' + REDIRECT + '&scope=' + SCOPE)
+      let scopes = 'user-read-private user-top-read'
+      window.open(
+        'https://accounts.spotify.com/authorize?' +
+        querystring.stringify({
+          response_type: 'token',
+          client_id: CLIENT_ID,
+          scope: scopes,
+          redirect_uri: REDIRECT,
+          show_dialog: 'true' // User should approve every time
+        }),
+        '_self'
+        // '_blank',
+        // 'width=400,height=600,scrollbars'
+      )
 
-      var REGEX = RegExp('access_token=.*?&')
-      this.token = this.location.href.match(REGEX)[0].replace('access_token=', '').slice(0, -1)
-
-      // this.location.href.match(RegExp('access_token=.*?&'))[0].replace('access_token=', '').slice(0, -1)
-
-      // }).then(response => {
-      //   if (response.ok) {
-      //     return response.json()
-      //   } else {
-      //     this.$buefy.toast.open({
-      //       message: 'Something went wrong, please try again',
-      //       type: 'is-danger'
-      //     })
-      //   }
-      // }).then(data => {
-      //   console.log(data)
-      // })
+      console.log('Opened new window for OAuth')
     }
   }
 }
